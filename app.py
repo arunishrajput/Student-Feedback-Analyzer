@@ -15,14 +15,24 @@ from wordcloud import WordCloud
 from google import genai
 from google.genai import types
 
+# # -------------------------
+# # Config (from env)
+# # -------------------------
+# GEMINI_KEY = os.getenv("GEMINI_API_KEY")
+# DB_HOST = os.getenv("DB_HOST", "localhost")
+# DB_USER = os.getenv("DB_USER", "root")
+# DB_PASSWORD = os.getenv("DB_PASSWORD", "")
+# DB_NAME = os.getenv("DB_NAME", "feedback_db")
+
 # -------------------------
-# Config (from env)
+# Config (from Streamlit secrets)
 # -------------------------
-GEMINI_KEY = os.getenv("GEMINI_API_KEY")
-DB_HOST = os.getenv("DB_HOST", "localhost")
-DB_USER = os.getenv("DB_USER", "root")
-DB_PASSWORD = os.getenv("DB_PASSWORD", "")
-DB_NAME = os.getenv("DB_NAME", "feedback_db")
+GEMINI_KEY = st.secrets["GEMINI_API_KEY"]
+DB_HOST = st.secrets["DB_HOST"]
+DB_PORT = int(st.secrets["DB_PORT"])
+DB_USER = st.secrets["DB_USER"]
+DB_PASSWORD = st.secrets["DB_PASSWORD"]
+DB_NAME = st.secrets["DB_NAME"]
 
 # -------------------------
 # Initialize Gemini client
@@ -37,6 +47,7 @@ client = genai.Client()  # uses env var GEMINI_API_KEY
 def get_db_connection():
     conn = mysql.connector.connect(
         host=DB_HOST,
+        port=DB_PORT,
         user=DB_USER,
         password=DB_PASSWORD,
         database=DB_NAME,
