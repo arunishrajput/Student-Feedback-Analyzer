@@ -28,11 +28,11 @@ from google.genai import types
 # Config (from Streamlit secrets)
 # -------------------------
 GEMINI_KEY = st.secrets["GEMINI_API_KEY"]
-DB_HOST = st.secrets["DB_HOST"]
-DB_PORT = int(st.secrets["DB_PORT"])
-DB_USER = st.secrets["DB_USER"]
-DB_PASSWORD = st.secrets["DB_PASSWORD"]
-DB_NAME = st.secrets["DB_NAME"]
+DB_HOST = st.secrets["database"]["DB_HOST"]
+DB_PORT = int(st.secrets["database"]["DB_PORT"])
+DB_USER = st.secrets["database"]["DB_USER"]
+DB_PASSWORD = st.secrets["database"]["DB_PASSWORD"]
+DB_NAME = st.secrets["database"]["DB_NAME"]
 
 # -------------------------
 # Initialize Gemini client
